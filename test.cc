@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 jafp.
+ *
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
 
 #include <cmath>
 #include <cstdlib>
@@ -25,7 +31,6 @@ std::mutex mtx;
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<> dis(1, 20);
-
 
 static void procFn(const MyData& value) {
 	int t = dis(gen);

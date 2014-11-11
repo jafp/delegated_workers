@@ -1,0 +1,1 @@
+Delegated workers using C++11's Thread library.
