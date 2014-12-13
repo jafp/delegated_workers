@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 jafp.
+ * Copyright 2014 jafp.
  *
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
@@ -49,32 +49,33 @@ public:
 
 	typedef std::vector<worker_pointer> worker_list;
 
-	// Construction/Destruction
-
 	/**
+	 * Create a new worker pool with the given process function. 
+	 * The process function is executed for each worker with the queued data.
 	 * 
+	 * \param fn Process function
 	 */
 	explicit WorkerPool(proc_fn fn) : proc_fn_(fn), work_no_(0) {};
 
 	/**
-	 *
+	 * Tear down.
 	 */
 	~WorkerPool() {};
 
-	// Public interface
-
 	/**
-	 *
+	 * Prepares the worker pool by allocating and starting worker threads.
 	 */
 	void prepare();
 
 	/**
-	 *
+	 * Stop all workers and wait for them to finish executing.
 	 */
 	void join();
 
 	/**
+	 * Queue some data for processing.
 	 *
+	 * \param value Data
 	 */
 	void queue(T& value);	
 
@@ -86,6 +87,7 @@ private:
 	// List of workers
 	worker_list worker_list_;
 
+	// Counter 
 	unsigned int work_no_;
 
 	// Method called for each worker
@@ -112,7 +114,6 @@ void WorkerPool<T, S>::join() {
 	assert(worker_list_.size() == S);
 	for (int i = 0; i < S; i++) {
 		worker_pointer ptr = worker_list_[i];
-		//cout << "Marking as stopped and joined" << endl;
 		ptr->lock_.lock();
 		ptr->state_ = Stopped;
 		ptr->lock_.unlock();

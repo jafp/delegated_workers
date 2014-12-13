@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 jafp.
+ * Copyright 2014 jafp.
  *
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
